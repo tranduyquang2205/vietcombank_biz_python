@@ -53,13 +53,12 @@ class Transactions(BaseModel):
     from_date: str
     to_date: str
     limit: int
-    page: int
     
 @app.post('/get_transactions', tags=["get_transactions"])
 def get_transactions_api(input: Transactions):
     try:
         vcb = VietCombank(input.username, input.password, input.account_number)
-        response = vcb.getHistories(input.from_date, input.to_date, input.account_number, input.page,input.limit)
+        response = vcb.getHistories(input.from_date, input.to_date, input.account_number,input.limit)
         return APIResponse.json_format(response)
     except Exception as e:
         response = str(e)

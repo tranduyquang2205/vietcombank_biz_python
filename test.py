@@ -1,7 +1,7 @@
 from vietcombank import VietCombank
 import json
 
-vcb = VietCombank('08864387951', 'Dqxkv2205.,', '0621000456871')
+vcb = VietCombank('29588443S57', 'Aa666888@', '1047889848')
 
 #OTP is required first login only, then youn can call action without it after login
 login = vcb.doLogin()
@@ -11,9 +11,9 @@ balance = vcb.getlistAccount()
 print(balance)
         
 # OTP is required first login only, then youn can call action without it after login
-result = vcb.getHistories("15/01/2024", "15/01/2024", '0621000456871', 0)
+result = vcb.getHistories("15/01/2024", "15/01/2024", '1047889848', 0)
 print((result))
-# account_number="0621000456871"
+# account_number="1047889848"
 # amount="50000"
 # message="123"
 # result = vcb.createTranferInVietCombank(account_number, amount, message)

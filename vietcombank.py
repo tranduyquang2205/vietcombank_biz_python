@@ -292,7 +292,7 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
             "user": self.username
         }
         result = self.curlPost(self.url['authen-service'] + "3011", param)
-        if result["code"] == "00":
+        if result["data"]["code"] == "00":
             self.sessionId = result["sessionId"]
             self.mobileId = result["userInfo"]["mobileId"]
             self.clientId = result["userInfo"]["clientId"]
