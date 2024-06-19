@@ -474,7 +474,24 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
                 "source": "IB"
             }
         result = self.curlPost(self.url['getlistAccount'], param)
-        return result
+        if 'data' in result and 'listAccount' in result['data']:
+            for account in result['data']['listAccount']:
+                if self.account_number == account['accountNo']:
+                    if int(account['avaiableAmount']) < 0:
+                        return {'code':448,'success': False, 'message': 'Blocked account with negative balances!',
+                                'data': {
+                                    'balance':int(account['avaiableAmount'])
+                                }
+                                }
+                    else:
+                        return {'code':200,'success': True, 'message': 'Thành công',
+                                'data':{
+                                    'account_number':self.account_number,
+                                    'balance':int(account['avaiableAmount'])
+                        }}
+            return {'code':404,'success': False, 'message': 'account_number not found!'} 
+        else: 
+            return {'code':520 ,'success': False, 'message': 'Unknown Error!'} 
 
     def getlistDDAccount(self):
         param = {
