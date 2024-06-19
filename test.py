@@ -11,7 +11,7 @@ balance = vcb.getlistAccount()
 print(balance)
         
 # OTP is required first login only, then youn can call action without it after login
-result = vcb.getHistories("15/01/2024", "15/01/2024", '1047889848', 0)
+result = vcb.getHistories("2024-06-10", "2024-06-19", '1047889848', 0)
 print((result))
 # account_number="1047889848"
 # amount="50000"

@@ -553,10 +553,10 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
         }
         result = self.curlPost(self.url['getHistories'], param)
         print(result)
-        if result['code'] == '00' and 'transactions' in result:
+        if result['code'] == '00' and 'data' in result and 'listHistory' in result['data']:
             return {'code':200,'success': True, 'message': 'Thành công',
                             'data':{
-                                'transactions':result['transactions'],
+                                'transactions':result['data']['listHistory'],
                     }}
         else:
             return  {
