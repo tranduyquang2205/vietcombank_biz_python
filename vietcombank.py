@@ -33,7 +33,7 @@ class VietCombank:
         self._timeout = 60
         self.appVersion = ""
         self.DT = "WINDOWS"
-        self.OV = "125.0.0.0"
+        self.OV = "126.0.0.0"
         self.PM = "Edge"
         self.checkAcctPkg = "1"
         self.captcha1st = ""
@@ -552,6 +552,7 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
             "user": self.username,
         }
         result = self.curlPost(self.url['getHistories'], param)
+        print(result)
         if result['code'] == '00' and 'transactions' in result:
             return {'code':200,'success': True, 'message': 'Thành công',
                             'data':{

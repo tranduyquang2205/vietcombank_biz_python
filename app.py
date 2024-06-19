@@ -52,7 +52,6 @@ class Transactions(BaseModel):
     account_number: str
     from_date: str
     to_date: str
-    limit: int
     
 @app.post('/get_transactions', tags=["get_transactions"])
 def get_transactions_api(input: Transactions):
