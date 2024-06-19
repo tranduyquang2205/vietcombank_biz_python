@@ -394,6 +394,7 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
             }
             self.save_data()
             return {
+                'code': 200,
                 'success': True,
                 'message': "success",
                 'session': session,
@@ -401,6 +402,7 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
             }
         else:
             return {
+                'code': 500,
                 'success': False,
                 'message': result['message'],
                 "param": param,
