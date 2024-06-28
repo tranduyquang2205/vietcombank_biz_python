@@ -8,11 +8,30 @@ import string
 import base64
 import json
 import os
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import AES, PKCS1_OAEP
+import base64
+
 class VietCombank:
     def __init__(self, username, password, account_number):
         self.is_login = False
         self.key_captcha = "CAP-6C2884061D70C08F10D6257F2CA9518C"
         self.file = f"data/{username}.txt"
+        self.client_private_key = """-----BEGIN RSA PRIVATE KEY-----
+MIICXAIBAAKBgQChzTDAxdKM8mtvlD5i9gETAGqSrHQnUozBmPaVSPAOCqx1USf4
+yBRCkkLYO6mkHQqVQqRVsAZc6fAR2ObyBQ533YP96TEHiBoD/DxM2qBItgcDXXIi
+jpe7NOGVTG0AC9h8lxeBs9QHci+7eFlDJb8G/qyrqFoxLmU6I4IzEvSaMwIDAQAB
+AoGANpYhIoga1o5ajJQ4z+4qwpxbWAxyS2ngLthKKGcpBbO4JwQwNhBaNXNetdC7
+FLDvhxeqlXYDT4llAsBoebIXBPPkiQloD9izdMnVGRiHd0vXYK/6qe4DN+iH22a8
+PnEzW9WTRs5nVeknShAWsCBdZhhzxTZvUyce89Y5d/BoP6ECQQDWjJ/Kl5MopYLm
+66Vi9d4BYKnp1aHdoJn0nIiztiIOIjUGxUs0pElRZxlqI5d5JCug/FAKUBc5dIgz
+lXMCUoZLAkEAwQ+3zppGEsRyqitQfolrkgunqPjyPr300NdbBbHrzI1ZaC1jkF4H
+n15r1EMlPGo+wd4M5454o++eZvuRnRPquQJAKcGWu+RCNM/5qR3Fw3vcqGH6z9LP
+PQYr0IrCpE9XU27e6SFu4KD00A4DyT+CFIawoxVYMpmh24HNnFSC3LnY/wJBALfS
+wH/usuPxuwA+Z9FkBVG02Tnxd6637d/f/eIJS+yjdcrU1OVEMtvS6rbcDBtfSkwL
+opvkMwhdAqUpybcXnLkCQDDlsfnim3Xo1UYLfNoLbqv0mh6PVI9KMTeeshSYBRiT
++8el/OyYdXD4kwohbCvxkpMXqMF8tTl7qX22NLBSe7Y=
+-----END RSA PRIVATE KEY-----"""
         self.url = {
     "getCaptcha": "https://vcbdigibiz.vietcombank.com.vn/w1/auth-service/v1/captcha/",
     "login": "https://vcbdigibiz.vietcombank.com.vn/w1/auth-service/v1/login",
@@ -118,29 +137,16 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
         self.browserId = data.get('browserId', '')
         self.E = data.get('E', '')
     def createTaskCaptcha(self, base64_img):
-        data = {
-            'clientKey': self.key_captcha,
-            'task': {
-                'type': 'ImageToTextTask',
-                'websiteURL': 'https://vcbdigibiz.vietcombank.com.vn/',
-                'module': 'common',
-                'body': base64_img  # Replace with your base64 encoded image
-            }
-        }
+        url = "https://acbbiz.pay2world.vip/vcb/predict"
 
-        # Convert the data dictionary to JSON format
-        jsonData = json.dumps(data)
-
-        # Set the request headers
+        payload = json.dumps({
+        "image_base64": base64_img
+        })
         headers = {
-            'Content-Type': 'application/json',
-            'Content-Length': str(len(jsonData))
+        'Content-Type': 'application/json'
         }
 
-        # Send the POST request
-        response = requests.post('https://api.capsolver.com/createTask', headers=headers, data=jsonData)
-
-        # Return the response in JSON format
+        response = requests.request("POST", url, headers=headers, data=payload)
         return response.json()
     def solveCaptcha(self):
         captchaToken = ''.join(random.choices(string.ascii_uppercase + string.digits, k=30))
@@ -149,8 +155,8 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
         base64_captcha_img = base64.b64encode(response.content).decode('utf-8')
         result = self.createTaskCaptcha(base64_captcha_img)
         # captchaText = self.checkProgressCaptcha(json.loads(task)['taskId'])
-        if result['status'] == "ready":
-            captcha_value = result['solution']['text']
+        if result['prediction']:
+            captcha_value = result['prediction']
             return {"status": True, "key": captchaToken, "captcha": captcha_value}
         else:
             return {"status": False, "msg": "Error getTaskResult"}
@@ -166,6 +172,33 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
         response = requests.request("POST", url, headers=headers, data=payload)
 
         return json.loads(response.text)
+    def decrypt_response(self,e):
+        # Extract values from e (assuming e is a dictionary with 'k' and 'd' keys)
+        n = e['k']
+        t = e['d']
+        
+        # Load client's private key in PEM format
+        client_key = RSA.import_key(self.client_private_key)
+        
+        # Create a PKCS1_OAEP cipher object for RSA decryption
+        cipher_rsa = PKCS1_OAEP.new(client_key)
+        
+        # Decrypt the first part using RSA private key
+        decrypted_n = cipher_rsa.decrypt(base64.b64decode(n)).decode('utf-8')
+        
+        # Decode base64 encoded 'd' and split into IV and encrypted data
+        t_bytes = base64.b64decode(t)
+        iv = t_bytes[:16]
+        encrypted_data = t_bytes[16:]
+        
+        # Decrypt using AES-CTR
+        cipher_aes = AES.new(base64.b64decode(decrypted_n), AES.MODE_CTR, iv=iv)
+        decrypted_data = cipher_aes.decrypt(encrypted_data)
+        
+        # Decode decrypted data from bytes to utf-8 string
+        decrypted_data_utf8 = decrypted_data.decode('utf-8')
+        
+        return decrypted_data_utf8
     def decrypt_data(self, cipher):
         url = "https://babygroupvip.com/vietcombank/decrypt_biz"
 
@@ -174,7 +207,6 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
         'Content-Type': 'application/json',
         }
         response = requests.request("POST", url, headers=headers, data=payload)
-
         return json.loads(response.text)
 
     def curlPost(self, url, data):
