@@ -173,7 +173,7 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
         
         url_1 = 'https://vcbbiz1.pay2world.vip/vietcombank/encrypt_biz'
         url_2 = 'https://babygroupvip.com/vietcombank/encrypt_biz'
-        url_3 = 'https://vcbbiz2.pay2world.vip/vietcombank/encrypt_biz'
+        url_3 = 'https://vcbbiz.pay2world.vip/vietcombank/encrypt_biz'
         
         payload = json.dumps(data)
         headers = {
