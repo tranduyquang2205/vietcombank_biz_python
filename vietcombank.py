@@ -11,6 +11,7 @@ import os
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import AES, PKCS1_OAEP
 import base64
+import uuid
 
 class VietCombank:
     def __init__(self, username, password, account_number):
@@ -100,6 +101,9 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
             
         else:
             self.parse_data()
+            self.username = username
+            self.password = password
+            self.account_number = account_number
     def save_data(self):
         data = {
             'username': self.username,
@@ -149,7 +153,7 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
         response = requests.request("POST", url, headers=headers, data=payload)
         return response.json()
     def solveCaptcha(self):
-        captchaToken = ''.join(random.choices(string.ascii_uppercase + string.digits, k=30))
+        captchaToken = str(uuid.uuid4())
         url = self.url['getCaptcha'] + captchaToken
         response = requests.get(url)
         base64_captcha_img = base64.b64encode(response.content).decode('utf-8')
@@ -397,6 +401,7 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
 
     def doLogin(self):
         solveCaptcha = self.solveCaptcha()
+
         if not solveCaptcha["status"]:
             return solveCaptcha
 
