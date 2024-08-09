@@ -139,17 +139,26 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
         self.browserId = data.get('browserId', '')
         self.E = data.get('E', '')
     def createTaskCaptcha(self, base64_img):
-        url = "https://acbbiz.pay2world.vip/vcb/predict"
-
+        url_1 = 'https://captcha.pay2world.vip//vcb'
+        url_2 = 'https://captcha1.pay2world.vip//vcb'
+        url_3 = 'https://captcha2.pay2world.vip//vcb'
+        
         payload = json.dumps({
         "image_base64": base64_img
         })
         headers = {
         'Content-Type': 'application/json'
         }
-
-        response = requests.request("POST", url, headers=headers, data=payload)
-        return response.json()
+        
+        for _url in [url_1, url_2, url_3]:
+            try:
+                response = requests.request("POST", _url, headers=headers, data=payload, timeout=10)
+                if response.status_code in [404, 502]:
+                    continue
+                return json.loads(response.text)
+            except:
+                continue
+        return {}
     def solveCaptcha(self):
         captchaToken = str(uuid.uuid4())
         url = self.url['getCaptcha'] + captchaToken
