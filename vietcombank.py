@@ -51,7 +51,7 @@ opvkMwhdAqUpybcXnLkCQDDlsfnim3Xo1UYLfNoLbqv0mh6PVI9KMTeeshSYBRiT
         self._timeout = 60
         self.appVersion = ""
         self.DT = "WINDOWS"
-        self.OV = "126.0.0.0"
+        self.OV = "131.0.0.0"
         self.PM = "Edge"
         self.checkAcctPkg = "1"
         self.captcha1st = ""
@@ -67,19 +67,19 @@ VQIDAQAB\n\
 -----END PUBLIC KEY-----"
         self.clientPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCg+aN5HEhfrHXCI/pLcv2Mg01gNzuAlqNhL8ojO8KwzrnEIEuqmrobjMFFPkrMXUnmY5cWsm0jxaflAtoqTf9dy1+LL5ddqNOvaPsNhSEMmIUsrppvh1ZbUZGGW6OUNeXBEDXhEF8tAjl3KuBiQFLEECUmCDiusnFoZ2w/1iOZJwIDAQAB"
         self.clientPrivateKey = "-----BEGIN RSA PRIVATE KEY-----\n\
-MIICXQIBAAKBgQCg+aN5HEhfrHXCI/pLcv2Mg01gNzuAlqNhL8ojO8KwzrnEIEuq\n\
-mrobjMFFPkrMXUnmY5cWsm0jxaflAtoqTf9dy1+LL5ddqNOvaPsNhSEMmIUsrppv\n\
-h1ZbUZGGW6OUNeXBEDXhEF8tAjl3KuBiQFLEECUmCDiusnFoZ2w/1iOZJwIDAQAB\n\
-AoGAEGDV7SCfjHxzjskyUjLk8UL6wGteNnsdLGo8WtFdwbeG1xmiGT2c6eisUWtB\n\
-GQH03ugLG1gUGqulpXtgzyUYcj0spHPiUiPDAPY24DleR7lGZHMfsnu20dyu6Llp\n\
-Xup07OZdlqDGUm9u2uC0/I8RET0XWCbtOSr4VgdHFpMN+MECQQDbN5JOAIr+px7w\n\
-uhBqOnWJbnL+VZjcq39XQ6zJQK01MWkbz0f9IKfMepMiYrldaOwYwVxoeb67uz/4\n\
-fau4aCR5AkEAu/xLydU/dyUqTKV7owVDEtjFTTYIwLs7DmRe247207b6nJ3/kZhj\n\
-gsm0mNnoAFYZJoNgCONUY/7CBHcvI4wCnwJBAIADmLViTcjd0QykqzdNghvKWu65\n\
-D7Y1k/xiscEour0oaIfr6M8hxbt8DPX0jujEf7MJH6yHA+HfPEEhKila74kCQE/9\n\
-oIZG3pWlU+V/eSe6QntPkE01k+3m/c82+II2yGL4dpWUSb67eISbreRovOb/u/3+\n\
-YywFB9DxA8AAsydOGYMCQQDYDDLAlytyG7EefQtDPRlGbFOOJrNRyQG+2KMEl/ti\n\
-Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
+MIICXAIBAAKBgQCbedGP59Irc4MqCHFZ6vgRMJ0G8LaTb1lPGhbHLMxHXP60+wLD\n\
+gv3b4yuSHw65OYSO8FIlF+SXLBzm8z+J+8ahp9zekFvCCH4SlYjxtVYvkvnw5zqx\n\
+9o94P4bIIdkt7T1Y9By/3qVGuTvOXC8/XV7GOQAkk+N2nDYpfv7zV4ZSOQIDAQAB\n\
+AoGAS/vMJDVarKumdbtsklJYbCZDB+pKgGGR1yvb5/mH2HSlcpOeNSjmojkyyRXu\n\
+ny1yEF149/HmYM9JTMGi0u++kesrcLAQeieNFKsgt0r7AdcwYOhqF+eBnZj2ccxV\n\
+OOnrol9KN5QAnEpsuJ1TNXOo8SZ/wpSu6VR8tFna1PTu/yUCQQDqWhV45pvMtXd7\n\
+3g0fNRNWwyW0zcrF+UOBugSSW0W6/KOBqx+L0u+baF6DBRRq5TUE5nvFw55iiOuR\n\
+bGDZaM+/AkEAqdZ8nvMSz5d/Icbxsm3l7EC0OC4gHAJc+On4qooFpgHqU+YZB0O9\n\
+O0+k3zNehHm0YEjvl+34P8RVkvkjBQBcBwJAEmtYKrN9ZV6R8JNoVp6WUYhvC0Ht\n\
+gRfxXV3ghBxWY7b9pvBrP1Mp7/4JB6U7kJdJToRLECUq6rW2RizNg+kAAwJAT9/m\n\
+AENFZ4hSbCpKZaY16iSMHZfj1ghufUpcfqgm++oOsKKYxsfe6VQNsENSgm9Sm63x\n\
+sLxkcmj97f9pruJ6ZQJBANq46SPFn1Yh7imtUTHKI4zpe+KcjRNazRurPxHdM63g\n\
+Iqs36Yip5WMUDmHxJAgfrYgEP4KIibDf/kr6tPqTdz4=\n\
 -----END RSA PRIVATE KEY-----"
         if not os.path.exists(self.file):
             self.username = username
@@ -180,8 +180,8 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
         https://encrypt1.pay2world.vip/api.php?act=encrypt_viettin
         """
         
-        url_1 = 'https://vcbbiz1.pay2world.vip/vietcombank/encrypt_biz'
-        url_2 = 'https://babygroupvip.com/vietcombank/encrypt_biz'
+        url_1 = 'https://sodo666.vip/vietcombank/encrypt_biz'
+        url_2 = 'https://vcbcp1.pay2world.vip/vietcombank/encrypt_biz'
         url_3 = 'https://vcbbiz.pay2world.vip/vietcombank/encrypt_biz'
         
         payload = json.dumps(data)
@@ -206,8 +206,8 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
         https://encrypt1.pay2world.vip/api.php?act=encrypt_viettin
         """
         
-        url_1 = 'https://vcbbiz1.pay2world.vip/vietcombank/decrypt_biz'
-        url_2 = 'https://babygroupvip.com/vietcombank/decrypt_biz'
+        url_1 = 'https://sodo666.vip/vietcombank/decrypt_biz'
+        url_2 = 'https://vcbbiz1.pay2world.vip/vietcombank/decrypt_biz'
         url_3 = 'https://vcbbiz2.pay2world.vip/vietcombank/decrypt_biz'
         
         payload = json.dumps(cipher)
@@ -408,7 +408,6 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
 
     def doLogin(self):
         solveCaptcha = self.solveCaptcha()
-
         if not solveCaptcha["status"]:
             return solveCaptcha
 
@@ -428,8 +427,7 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
             "source": "IB"
         }
         result = self.curlPost(self.url['login'], param)
-        print(result)
-        if result['code'] == "00":
+        if 'code' in result and result['code'] == "00":
             self.sessionId = result['data']['sessionId']
             self.mobileId = result['data']['mobileOtp']
             self.clientId = result['data']['userInfo']['packageAccountNo']
@@ -452,7 +450,7 @@ Yr4ZPChxNrik1CFLxfkesoReXN8kU/8918D0GLNeVt/C\n\
             return {
                 'code': 500,
                 'success': False,
-                'message': result['message'],
+                'message': result['message'] if 'message' in result else result,
                 "param": param,
                 'data': result if result else ""
             }
